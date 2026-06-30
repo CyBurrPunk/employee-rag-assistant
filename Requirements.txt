@@ -1,5 +1,9 @@
 streamlit
-google-genai
-langchain
-chromadb
 pypdf
+chromadb
+langchain
+langchain-community
+langchain-huggingface
+sentence-transformers
+google-genai
+python-dotenv
