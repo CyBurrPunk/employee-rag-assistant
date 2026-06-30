@@ -56,12 +56,6 @@ H --> I[Answer + Sources]
 
 ---
 
-## Screenshots
-
-(Add screenshot here)
-
----
-
 ## Learning Outcomes
 
 This project was built to understand how production Retrieval-Augmented Generation systems work.
