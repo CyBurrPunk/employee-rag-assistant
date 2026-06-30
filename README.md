@@ -24,19 +24,21 @@ Build an AI-powered Employee Knowledge Assistant capable of:
 
 ---
 
-# Current Progress
+## 🚀 Learning Progress
 
-| Version | Status |
-|---------|--------|
-| Version 1 - Static MVP | ✅ Completed |
-| Milestone 1 - PDF Loading | ✅ Completed |
-| Milestone 2 - Document Chunking | ⏳ Next |
-| Milestone 3 - Embeddings & Vector DB | ⏳ Planned |
-| Milestone 4 - Retrieval Pipeline | ⏳ Planned |
-| Milestone 5 - Gemini Response Generation | ⏳ Planned |
-| Version 3 - RAG Evaluation | ⏳ Planned |
-| Version 4 - GraphRAG | ⏳ Planned |
-| Version 5 - Agentic RAG | ⏳ Planned |
+| Milestone | Status |
+|------------|--------|
+| Version 1 – Static Employee Assistant | ✅ |
+| Milestone 1 – PDF Loading | ✅ |
+| Milestone 2 – Document Chunking | ✅ |
+| Milestone 3 – Embedding Generation | ✅ |
+| Milestone 4 – Semantic Retrieval (Cosine Similarity) | ✅ |
+| Milestone 5 – ChromaDB Vector Store | ⏳ Next |
+| Milestone 6 – Gemini RAG Pipeline | ⏳ |
+| Milestone 7 – Source Citations | ⏳ |
+| Milestone 8 – Evaluation Framework | ⏳ |
+| Version 3 – GraphRAG | ⏳ |
+| Version 4 – Agentic RAG | ⏳ |
 
 ---
 
@@ -66,28 +68,24 @@ Learned:
 # Project Architecture
 
 ```
-Employee Policies (PDFs)
-            │
-            ▼
-      PDF Loader ✅
-            │
-            ▼
-    Document Chunking
-            │
-            ▼
-       Embeddings
-            │
-            ▼
-     Chroma Vector DB
-            │
-            ▼
- Retrieve Relevant Chunks
-            │
-            ▼
- Google Gemini LLM
-            │
-            ▼
-Answer with Source Citation
+## 🏗️ Current Architecture
+
+
+flowchart TD
+
+A[Employee Policy PDFs]
+
+--> B[PDF Loader]
+
+B --> C[Document Chunking]
+
+C --> D[Embedding Generation]
+
+D --> E[Manual Semantic Retrieval]
+
+E --> F[Gemini LLM]
+
+F --> G[Answer with Source Citation]
 ```
 
 ---
