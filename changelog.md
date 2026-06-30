@@ -50,3 +50,18 @@ All notable changes to this project will be documented here.
 - Understood semantic embeddings.
 - Learned cosine similarity.
 - Built retrieval before introducing ChromaDB.
+
+## v1.4.0 - ChromaDB Vector Store Integration
+
+### Added
+
+- Integrated ChromaDB as a persistent vector database for storing document embeddings.
+- Replaced manual semantic retrieval with ChromaDB similarity search.
+- Added document indexing and retrieval modules with reusable helper functions.
+- Persisted embeddings locally to support efficient semantic search across application restarts.
+
+### Learning Outcomes
+
+- Understood the role of vector databases in Retrieval-Augmented Generation (RAG).
+- Learned how embeddings are indexed and retrieved using similarity search.
+- Explored how metadata can be stored alongside vectors for future filtering and retrieval enhancements.
