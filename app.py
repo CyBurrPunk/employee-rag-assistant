@@ -1,43 +1,119 @@
 import streamlit as st
 
-st.title("Employee Knowledge Assistant")
+from src.pdf_loader import load_documents
+from src.text_splitter import split_documents
+from src.chroma_store import index_chunks
+from src.rag_pipeline import ask_question
 
-question = st.text_input("Ask a question")
+st.set_page_config(
+    page_title="Employee Knowledge Assistant",
+    page_icon="🤖",
+    layout="wide"
+)
 
-if question:
+# ---------- Header ----------
 
-    if "leave" in question.lower():
+st.title("🤖 Employee Knowledge Assistant")
+st.caption(
+    "An AI-powered knowledge assistant built using Retrieval-Augmented Generation (RAG), ChromaDB and Gemini."
+)
 
-        st.write(
-            "Employees can carry forward up to 10 annual leaves."
-        )
+# ---------- Sidebar ----------
 
-        st.write(
-            "Source: Leave Policy.pdf"
-        )
+with st.sidebar:
 
-    elif "travel" in question.lower():
+    st.header("📌 About")
 
-        st.write(
-            "Travel reimbursements require manager approval."
-        )
+    st.write(
+        """
+Ask questions about company policies using AI.
 
-        st.write(
-            "Source: Travel Policy.pdf"
-        )
+The assistant retrieves relevant policy documents,
+grounds responses using those documents,
+and generates answers using Gemini.
+"""
+    )
 
-    elif "it" in question.lower():
+    st.divider()
 
-        st.write(
-            "Raise an IT ticket through the company portal."
-        )
+    st.subheader("💡 Sample Questions")
 
-        st.write(
-            "Source: IT Policy.pdf"
-        )
+    st.markdown("""
+- Can I carry forward annual leave?
+- What is the travel reimbursement policy?
+- How many sick leaves are allowed?
+- How do I reset my password?
+- How can I access VPN?
+""")
 
-    else:
+    st.divider()
 
-        st.write(
-            "I could not find relevant information."
-        )
+    st.subheader("⚙️ Tech Stack")
+
+    st.markdown("""
+- Streamlit
+- ChromaDB
+- Gemini 2.5 Flash
+- Sentence Transformers
+- Python
+""")
+
+# ---------- Load KB ----------
+
+@st.cache_resource
+def load_knowledge_base():
+
+    documents = load_documents()
+
+    chunks = split_documents(documents)
+
+    collection = index_chunks(chunks)
+
+    return collection
+
+
+collection = load_knowledge_base()
+
+st.success("✅ Knowledge Base Loaded")
+
+# ---------- Question ----------
+
+question = st.text_input(
+    "Ask your question",
+    placeholder="Example: Can I carry forward annual leave?"
+)
+
+col1, col2 = st.columns([1,6])
+
+with col1:
+
+    ask = st.button("🚀 Ask")
+
+if ask:
+
+    if question.strip():
+
+        with st.spinner("Searching documents and generating answer..."):
+
+            answer, sources = ask_question(
+                collection,
+                question
+            )
+
+        st.divider()
+
+        st.subheader("🤖 Answer")
+
+        st.success(answer)
+
+        st.subheader("📚 Sources")
+
+        for source in sources:
+
+            st.markdown(f"📄 **{source}**")
+
+st.divider()
+
+st.caption(
+   "Built by Hrishikesh • Powered by Gemini + ChromaDB + Streamlit"
+)
