@@ -1,4 +1,22 @@
-__pycache__/
+# Virtual Environment
+.venv/
+
+# Environment Variables
 .env
-.vscode/
+
+# Streamlit Secrets
+.streamlit/secrets.toml
+
+# Python Cache
+__pycache__/
 *.pyc
+
+# Chroma DB
+chroma_db/
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
